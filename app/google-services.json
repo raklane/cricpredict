@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "255997221263",
+    "firebase_url": "https://my-project-cricpredict.firebaseio.com",
+    "project_id": "my-project-cricpredict",
+    "storage_bucket": "my-project-cricpredict.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255997221263:android:1f1de9087ba1ca7d88d3fa",
+        "android_client_info": {
+          "package_name": "com.rakeshsdetautomation.cricpredict"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255997221263-ahfvljlc77mbt3okikhsh20oq6ijhn5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9XoGSM25i0hfy6K0NpnabwfQ1CE_6_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255997221263-ahfvljlc77mbt3okikhsh20oq6ijhn5g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

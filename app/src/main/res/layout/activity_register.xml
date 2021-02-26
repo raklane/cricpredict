@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/home_screen_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        style="@style/MainAppHeaders"
+        android:text="Register"
+        android:gravity="center"
+        android:background="@color/mainAppColor"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:background="@color/secondaryAppColor"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Labels"
+                android:text="Name"
+                android:layout_weight="1"
+                android:textAlignment="center"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_weight="3"
+                android:textSize="16sp"
+                android:id="@+id/register_name_edit_text_view"
+                style="@style/EditTextTheme"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Labels"
+                android:text="Email"
+                android:layout_weight="1"
+                android:textAlignment="center"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_weight="3"
+                android:textSize="16sp"
+                android:id="@+id/register_email_edit_text_view"
+                style="@style/EditTextTheme"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Labels"
+                android:text="Password"
+                android:layout_weight="1"
+                android:textAlignment="center"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:layout_weight="3"
+                android:textSize="16sp"
+                android:id="@+id/register_password_edit_text_view"
+                style="@style/EditTextTheme"/>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/registration_form_error"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                tools:text="Error Text"
+                android:textSize="12dp"
+                android:textColor="@color/colorRed"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"/>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/registration_form_error"
+                android:layout_margin="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.5">
+
+                    <Button
+                        android:paddingTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Register"
+                        android:id="@+id/registration_button"
+                        android:layout_centerInParent="true"/>
+
+                    <Button
+                        android:paddingTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Back to Login"
+                        android:id="@+id/registration_back_to_login_button"
+                        android:layout_centerInParent="true"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"/>
+
+            </LinearLayout>
+
+
+
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/registration_success_text_view"
+            android:layout_margin="16dp"
+            android:paddingTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Registration Successful. Please Login."
+            android:textAlignment="center"
+            style="@style/Labels"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

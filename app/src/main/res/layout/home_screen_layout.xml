@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".loginandregistration.HomeScreenActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/secondaryAppColor">
+
+        <TextView
+            android:id="@+id/home_screen_title"
+            android:layout_width="match_parent"
+            style="@style/MainAppHeaders"
+            tools:text="Welcome!"
+            android:gravity="center"
+            android:background="@color/mainAppColor"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Your Stats"
+                android:textAlignment="center"
+                style="@style/SubHeaders"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your Rank"
+                        android:textAlignment="textEnd"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total Points"
+                        android:textAlignment="textEnd"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total Matches"
+                        android:textAlignment="textEnd"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total Matches played"
+                        android:textAlignment="textEnd"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/participant_text_view_rank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Your Rank"
+                        android:textAlignment="textStart"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                    <TextView
+                        android:id="@+id/participant_text_view_total_points"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Total Points"
+                        android:textAlignment="textStart"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                    <TextView
+                        android:id="@+id/participant_text_view_total_matches"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Total Matches"
+                        android:textAlignment="textStart"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                    <TextView
+                        android:id="@+id/participant_text_view_total_matches_played"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Total Matches played"
+                        android:textAlignment="textStart"
+                        android:layout_margin="8dp"
+                        style="@style/Labels"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/leadership_board_button"
+                        android:onClick="onLeadershipBoardButtonClick"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Leadership Board"
+                        android:layout_margin="8dp"/>
+
+                    <!--<Button
+                        android:id="@+id/next_match_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Search Participants"
+                        android:layout_margin="8dp"/>-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/previous_match_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Last match results"
+                        android:layout_margin="8dp"/>
+
+                    <!--<Button
+                        android:id="@+id/all_matches_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="All matches results"
+                        android:layout_margin="8dp"/>-->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/prediction_time_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Prediction Starts 14 hours before the match!"
+                style="@style/Labels"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:id="@+id/prediction_matches_linear_layout_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/first_match_linear_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border">
+
+                        <ImageView
+                            android:id="@+id/first_match_first_team_image"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="88dp"
+                            android:layout_margin="8dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@drawable/chennai_super_kings"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:orientation="vertical"
+                            android:layout_margin="8dp"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:id="@+id/first_match_first_team_name_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                tools:text="Chennai super kings"
+                                android:textAlignment="center"
+                                style="@style/TeamName"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="vs"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"/>
+
+                            <TextView
+                                android:id="@+id/first_match_second_team_name_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                tools:text="Royal Challengers Bangalore"
+                                android:textAlignment="center"
+                                style="@style/TeamName"/>
+
+                            <TextView
+                                android:id="@+id/first_match_time_remaining_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:layout_height="0dp"
+                                tools:text="Prediction ends at 14:30pm"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/first_match_second_team_image"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="88dp"
+                            android:layout_margin="8dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@drawable/royal_challengers_bangalore"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/second_match_linear_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/border">
+
+                        <ImageView
+                            android:id="@+id/second_match_first_team_image"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="88dp"
+                            android:layout_margin="8dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@drawable/mumbai_indians"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:orientation="vertical"
+                            android:layout_margin="8dp"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:id="@+id/second_match_first_team_name_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                tools:text="Mumbai Indians"
+                                android:textAlignment="center"
+                                style="@style/TeamName"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="vs"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"/>
+
+                            <TextView
+                                android:id="@+id/second_match_second_team_name_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                tools:text="Kolkata Knight Riders"
+                                android:textAlignment="center"
+                                style="@style/TeamName"/>
+
+                            <TextView
+                                android:id="@+id/second_match_time_remaining_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:layout_height="0dp"
+                                tools:text="Prediction ends at 14:30pm"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/second_match_second_team_image"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="88dp"
+                            android:layout_margin="8dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@drawable/kolkata_knight_riders"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

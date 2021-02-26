@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/secondaryAppColor"
+    tools:context=".SuccessfulPredictionActivity">
+
+    <TextView
+        android:id="@+id/successful_prediction_screen_title"
+        android:layout_width="match_parent"
+        style="@style/MainAppHeaders"
+        tools:text="Chennai Super Kings vs Mumbai Indians"
+        android:gravity="center"
+        android:background="@color/mainAppColor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Successful Prediction!"
+            android:textAlignment="center"
+            style="@style/SubHeaders"
+            android:layout_margin="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="8dp">
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Team 1 Batsman"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Team 2 Batsman"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Team 1 Bowler"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Team 2 Bowler"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Team 1 MoM"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Team 2 MoM"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Winning Team"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    style="@style/Labels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Toss Winning Team"
+                    android:textAlignment="textEnd" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:orientation="vertical"
+                android:layout_margin="8dp">
+
+                <TextView
+                    android:id="@+id/successful_prediction_batsman_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Batsman 1"
+                    android:textAlignment="textStart"/>
+
+                <TextView
+                    android:id="@+id/successful_prediction_batsman_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Batsman 2"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/successful_prediction_bowler_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Bowler 1"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/successful_prediction_bowler_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Bowler 2"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/successful_prediction_mom_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Man Of The Match 1"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/successful_prediction_mom_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Man Of The Match 2"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/successful_prediction_match_winner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Match Winner"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/successful_prediction_toss_winner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Labels"
+                    tools:text="Toss Winner"
+                    android:textAlignment="textStart"
+                    android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/successful_prediction_edit_prediction_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Prediction"
+            android:layout_margin="16dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

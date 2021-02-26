@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Cricket Predictor</string>
+    <string name="title_activity_participant_predictions">ParticipantPredictionsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_prediction_scores">PredictionScores</string>
+
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+    <string name="CHANNEL_PREDICTION_ID">prediction_reminder_channel</string>
+    <string name="CHANNEL_LEADERSHIP_ID">leadership_reminder_channel</string>
+
+</resources>
