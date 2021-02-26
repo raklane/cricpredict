@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.rakeshsdetautomation.cricpredict.loginandregistration.HomeScreenActivity;
 import com.rakeshsdetautomation.cricpredict.loginandregistration.MainActivity;
 
@@ -44,6 +45,8 @@ public class BaseClass {
     public static String resourceParticipantEditPrediction ="v1/participants/editPrediction/";
     public static String resourceParticipantPrediction = "v1/participants/participantprediction/";
     public static String resourceParticipant = "v1/participants/";
+
+    public static GoogleSignInClient mGoogleSignInClient;
 
     public static int serviceResponseCode;
     public static int totalNumberOfMatches;

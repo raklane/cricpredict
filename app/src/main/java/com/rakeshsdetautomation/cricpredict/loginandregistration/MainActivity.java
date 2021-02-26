@@ -1,6 +1,7 @@
 package com.rakeshsdetautomation.cricpredict.loginandregistration;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -18,6 +19,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +52,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
+    private static final int RC_SIGN_IN = 0;
 
     HashMap<String, String> credentials = new HashMap<String, String>();
     EditText user;
@@ -56,10 +63,27 @@ public class MainActivity extends AppCompatActivity {
 
     String userIdForRegistration;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
+        BaseClass.mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        findViewById(R.id.google_sign_in_button).setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.google_sign_in_button:
+                        googleSignIn();
+                        break;
+                }
+            }
+        });
 
 
         user = (EditText) findViewById(R.id.username);
@@ -101,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
 
         clearFields();
         fillUpRegisteredUser();
+
+    }
+
+    private void googleSignIn() {
+        Intent signInIntent = BaseClass.mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
 
     }
 
@@ -234,6 +264,38 @@ public class MainActivity extends AppCompatActivity {
         pass.setText("");
         error.setText("");
         BaseClass.clearAllValues();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null){
+            Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
+            homeScreenIntent.putExtra("username", account.getEmail());
+            startActivity(homeScreenIntent);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> task) {
+        try {
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
+            homeScreenIntent.putExtra("username", account.getEmail());
+            startActivity(homeScreenIntent);
+        } catch (ApiException e) {
+            Log.w(TAG, "signInResult: failed code=" +  e.getStatusCode());
+            //Pending: Update UI for error in sign in
+        }
     }
 }
 

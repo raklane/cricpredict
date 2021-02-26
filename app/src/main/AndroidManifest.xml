@@ -13,8 +13,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/cricpredict_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.rakeshsdetautomation.prediction_history.PredictionHistoryActivity"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name="com.rakeshsdetautomation.prediction_history.PredictionHistoryActivity" />
         <activity android:name=".MatchStoreBoard" />
         <activity android:name=".SuccessfulPredictionActivity" />
         <activity android:name=".PredictionActivity" />

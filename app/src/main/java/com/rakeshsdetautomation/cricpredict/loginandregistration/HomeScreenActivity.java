@@ -11,6 +11,9 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,10 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.rakeshsdetautomation.cricpredict.App;
 import com.rakeshsdetautomation.cricpredict.LeadershipBoardActivity;
 import com.rakeshsdetautomation.cricpredict.PredictionActivity;
@@ -44,6 +55,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     private NotificationManagerCompat notificationManagerCompat;
 
+    public static final String TAG = "HomeScreenActivity";
     private String scoreboardString;
     private int rank_int;
     TextView homeScreenTitle;
@@ -69,11 +81,15 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     Button lastDayMatchesResults;
 
+
     //@RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_layout);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
 
@@ -103,7 +119,14 @@ public class HomeScreenActivity extends AppCompatActivity {
         firstMatch.setVisibility(View.INVISIBLE);
         secondMatch.setVisibility(View.INVISIBLE);
 
-
+        if(BaseClass.userString == null){
+            try {
+                BaseClass.userString = BaseClass.convertStringToJson(BaseClass.getCall(BaseClass.serviceUrl + BaseClass.resourceParticipant + getIntent().getStringExtra("username")));
+            } catch (IOException e) {
+                Log.e(TAG, "User retrieval error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
 
         System.out.println(BaseClass.userString);
         //Set welcome message
@@ -127,23 +150,41 @@ public class HomeScreenActivity extends AppCompatActivity {
             }
         });
 
-        /*//Get today's matches results
-        final MatchStatsParse matchStatsParse;
-        try {
-            matchStatsParse = new MatchStatsParse(HomeScreenActivity.this);
-            matchStatsParse.execute("22396");
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cricpredict_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logout_link:
+                logout();
+                break;
+            case R.id.milestones:
+                //write code for milestones
+                break;
+            case R.id.settings:
+                //write code for settings
+                break;
         }
+        return super.onOptionsItemSelected(item);
+    }
 
-
-        Button previousMatchResult = (Button) findViewById(R.id.previous_match_button);
-        previousMatchResult.setOnClickListener(new View.OnClickListener() {
+    private void logout() {
+        BaseClass.mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
-            public void onClick(View v) {
-                System.out.println(Constants.matchStats);
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent mainScreenIntent = new Intent(HomeScreenActivity.this, MainActivity.class);
+                startActivity(mainScreenIntent);
             }
-        });*/
+        });
     }
 
     private class HomeScreenDataLoadAsyncTaskRunner extends AsyncTask<String, String, String>{
