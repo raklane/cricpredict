@@ -12,10 +12,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -49,19 +55,20 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 0;
 
-    HashMap<String, String> credentials = new HashMap<String, String>();
-    EditText user;
-    EditText pass;
-    TextView error;
-    Button registerButton;
-    String registeredUserId;
-
-    String userIdForRegistration;
+    private EditText user;
+    private EditText pass;
+    private TextView registerButton;
+    private Button loginButton;
+    private com.google.android.gms.common.SignInButton googleSignInButton;
+    private View banner;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+    private TextView forgotPassword;
 
 
     @Override
@@ -69,62 +76,115 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
         BaseClass.mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        findViewById(R.id.google_sign_in_button).setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()){
-                    case R.id.google_sign_in_button:
-                        googleSignIn();
-                        break;
-                }
-            }
-        });
-
 
         user = (EditText) findViewById(R.id.username);
         pass = (EditText) findViewById(R.id.password);
-        error = (TextView) findViewById(R.id.credentials_error);
-        registerButton = (Button) findViewById(R.id.login_page_registration_button);
+        registerButton = findViewById(R.id.login_page_registration_button);
+        loginButton = (Button) findViewById(R.id.login_button);
+        googleSignInButton = findViewById(R.id.google_sign_in_button);
+        banner = findViewById(R.id.banner);
+        progressBar = (ProgressBar) findViewById(R.id.login_progress_bar);
+        forgotPassword = (TextView) findViewById(R.id.login_page_forgot_password);
+
+        registerButton.setOnClickListener(this);
+        loginButton.setOnClickListener(this);
+        googleSignInButton.setOnClickListener(this);
+        banner.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
 
-        Button loginButton = (Button) findViewById(R.id.login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        //olg login method
+        /*loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginAsyncTaskRunner loginAsyncTaskRunner = new LoginAsyncTaskRunner();
                 loginAsyncTaskRunner.execute();
-                /*final Login login;
-                try {
-                    login = new Login(MainActivity.this);
-                    login.execute("http://ec2-18-191-155-71.us-east-2.compute.amazonaws.com:8080/cricpredictapi/services/v1/participants/login",
-                            new JSONObject().put("userId","rakesh.xyzz@gmail.com").put("password","abc12345").toString());
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }*/
             }
-        });
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registrationScreenInent = new Intent(MainActivity.this, RegisterActivity.class);
-                userIdForRegistration = user.getText().toString();
-                registrationScreenInent.putExtra("userIdForRegistration", userIdForRegistration);
-                startActivity(registrationScreenInent);
-            }
-        });
+        });*/
 
         clearFields();
         fillUpRegisteredUser();
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        String email;
+        switch (v.getId()){
+            case R.id.login_button:
+                userLogin();
+                break;
+            case R.id.login_page_registration_button:
+                //register
+                email = user.getText().toString();
+                startActivity(new Intent(this, RegisterActivity.class).putExtra("userIdForRegistration", email));
+                break;
+            case R.id.google_sign_in_button:
+                googleSignIn();
+                break;
+            case R.id.banner:
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.login_page_forgot_password:
+                email = user.getText().toString();
+                startActivity(new Intent(this, ForgotPassword.class).putExtra("email", email));
+                break;
+        }
+    }
+
+    private void userLogin() {
+
+        final String email = user.getText().toString().trim();
+        String password = pass.getText().toString();
+
+        if(email.isEmpty()){
+            user.setError("Email cannot be empty");
+            user.requestFocus();
+            return;
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            user.setError("Email is incorrect");
+            return;
+        }else if(password.isEmpty()){
+            pass.setError("Password cannot be empty");
+            pass.requestFocus();
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if(user.isEmailVerified()){
+                                Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
+                                homeScreenIntent.putExtra("username", email);
+                                startActivity(homeScreenIntent);
+                            }else{
+                                user.sendEmailVerification();
+                                Toast.makeText(MainActivity.this, "Check your email to verify your account", Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }else{
+                            Toast.makeText(MainActivity.this, "Failed to login. Check your credentials", Toast.LENGTH_LONG).show();
+                        }
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
 
     }
 
@@ -134,7 +194,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class LoginAsyncTaskRunner extends AsyncTask<String, String, String> {
+
+    //old login logic
+    /*private class LoginAsyncTaskRunner extends AsyncTask<String, String, String> {
 
         ProgressDialog progressDialog;
 
@@ -163,9 +225,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onUserLoginButtonClick() throws JSONException, IOException {
-        /*EditText user = (EditText) findViewById(R.id.username);
-        EditText pass = (EditText) findViewById(R.id.password);
-        TextView error = (TextView) findViewById(R.id.credentials_error);*/
 
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         if (user.isFocused() || pass.isFocused())
@@ -174,12 +233,17 @@ public class MainActivity extends AppCompatActivity {
         String username_text = user.getText().toString();
         String password_text = pass.getText().toString();
 
-        if (username_text.isEmpty() || password_text.isEmpty()) {
-            error.setText("Credentials cannot be empty!");
-            if (username_text.isEmpty())
-                user.getBackground().setColorFilter(getResources().getColor(R.color.colorRed), PorterDuff.Mode.SRC_ATOP);
-            else
-                pass.getBackground().setColorFilter(getResources().getColor(R.color.colorRed), PorterDuff.Mode.SRC_ATOP);
+        if(username_text.isEmpty()){
+            user.setError("Email cannot be empty");
+            user.requestFocus();
+            return;
+        }else if(password_text.isEmpty()){
+            pass.setError("Password cannot be empty");
+            pass.requestFocus();
+            return;
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(password_text).matches()){
+            user.setError("Email is incorrect");
+            user.requestFocus();
             return;
         }
 
@@ -199,15 +263,14 @@ public class MainActivity extends AppCompatActivity {
             BaseClass.userString = BaseClass.convertStringToJson(userString);
             BaseClass.userId_notification = username_text;
             if (BaseClass.userString == null) {
-                Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT).show();
-                error.setText("Server Error!");
+                Toast.makeText(this, "Server Error!", Toast.LENGTH_LONG).show();
                 return;
             }
             Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
             homeScreenIntent.putExtra("username", username_text);
             startActivity(homeScreenIntent);
         } else {
-            error.setText(new JSONObject(userString).getString("error"));
+            Toast.makeText(this, "Server Error!", Toast.LENGTH_LONG).show();
         }
 
 
@@ -242,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return null;
-    }
+    }*/
 
 
     private void fillUpRegisteredUser() {
@@ -262,7 +325,6 @@ public class MainActivity extends AppCompatActivity {
         pass.clearFocus();
         user.setText("");
         pass.setText("");
-        error.setText("");
         BaseClass.clearAllValues();
     }
 
@@ -274,6 +336,20 @@ public class MainActivity extends AppCompatActivity {
             Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
             homeScreenIntent.putExtra("username", account.getEmail());
             startActivity(homeScreenIntent);
+            return;
+        }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            if(user.isEmailVerified()){
+                Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
+                homeScreenIntent.putExtra("username", user.getEmail());
+                startActivity(homeScreenIntent);
+                return;
+            }else{
+                Intent homeScreenIntent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(homeScreenIntent);
+            }
         }
     }
 
@@ -299,53 +375,3 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-   /* private void getToken(){
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
-                        }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-
-                        // Log and toast
-                        String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        System.out.println("debug---" + msg);
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        DatabaseReference fcmDatabaseRef = ref.child("FCM_Device_Tokens").push();
-
-                        FCM_Device_Tokens obj = new FCM_Device_Tokens();
-                        obj.setToken(token);
-                        fcmDatabaseRef.setValue(obj);
-
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-
-
-}
-
-@IgnoreExtraProperties
-class FCM_Device_Tokens {
-
-    @SerializedName("token")
-    private String token;
-
-    public FCM_Device_Tokens() {
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-}*/

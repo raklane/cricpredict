@@ -29,10 +29,18 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rakeshsdetautomation.cricpredict.App;
 import com.rakeshsdetautomation.cricpredict.LeadershipBoardActivity;
 import com.rakeshsdetautomation.cricpredict.PredictionActivity;
@@ -56,13 +64,14 @@ public class HomeScreenActivity extends AppCompatActivity {
     private NotificationManagerCompat notificationManagerCompat;
 
     public static final String TAG = "HomeScreenActivity";
-    private String scoreboardString;
+    private String name;
     private int rank_int;
     TextView homeScreenTitle;
     TextView rank;
     TextView totalPoints;
     TextView totalMatches;
     TextView totalMatchesPlayed;
+    private FirebaseAuth mAuth;
 
 
     LinearLayout firstMatch;
@@ -81,12 +90,19 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     Button lastDayMatchesResults;
 
+    private FirebaseUser user;
+    private DatabaseReference reference;
+    private String userId;
+    private String email;
+
 
     //@RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_layout);
+
+        mAuth = FirebaseAuth.getInstance();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -130,12 +146,7 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         System.out.println(BaseClass.userString);
         //Set welcome message
-        try {
-            homeScreenTitle.setText("Welcome " + BaseClass.userString.getString("name") + "!");
-        } catch (JSONException e) {
-            homeScreenTitle.setText("Welcome!");
-            e.printStackTrace();
-        }
+        homeScreenTitle.setText("Welcome " + name + "!");
 
 
         HomeScreenDataLoadAsyncTaskRunner homeScreenDataLoadAsyncTaskRunner = new HomeScreenDataLoadAsyncTaskRunner();
@@ -153,6 +164,45 @@ public class HomeScreenActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user = mAuth.getCurrentUser();
+        if(user != null){
+
+            reference = FirebaseDatabase.getInstance().getReference("Users");
+            userId = user.getUid();
+
+            reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    User userProfile = snapshot.getValue(User.class);
+                    if(userProfile != null){
+                        name = userProfile.fullName;
+                        email = userProfile.email;
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(HomeScreenActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
+                }
+            });
+            homeScreenTitle.setText("Welcome " + name + "!");
+
+            return;
+
+        }
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null){
+            name = account.getDisplayName();
+            email = account.getEmail();
+            homeScreenTitle.setText("Welcome " + name + "!");
+            return;
+        }
     }
 
     @Override
@@ -178,6 +228,15 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     private void logout() {
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            mAuth.signOut();
+            Intent mainScreenIntent = new Intent(HomeScreenActivity.this, MainActivity.class);
+            startActivity(mainScreenIntent);
+            return;
+        }
+
         BaseClass.mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

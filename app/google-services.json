@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "255997221263-3v9nbd87kgoen3t11sk8fd01lpg0vfs4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rakeshsdetautomation.cricpredict",
+            "certificate_hash": "d0e23bf507b82df0ef3cfd20ce3a853b1373fcb6"
+          }
+        },
+        {
           "client_id": "255997221263-ahfvljlc77mbt3okikhsh20oq6ijhn5g.apps.googleusercontent.com",
           "client_type": 3
         }
