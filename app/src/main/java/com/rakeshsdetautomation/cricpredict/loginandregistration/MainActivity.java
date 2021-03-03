@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
@@ -38,6 +39,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.annotations.SerializedName;
+import com.rakeshsdetautomation.cricpredict.BaseActivity;
 import com.rakeshsdetautomation.cricpredict.R;
 import com.rakeshsdetautomation.cricpredict.RegisterActivity;
 import com.rakeshsdetautomation.cricpredict.constants.BaseClass;
@@ -55,7 +57,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 0;
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -169,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(task.isSuccessful()){
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                             if(user.isEmailVerified()){
                                 Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
                                 homeScreenIntent.putExtra("username", email);

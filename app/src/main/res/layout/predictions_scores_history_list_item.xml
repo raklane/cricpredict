@@ -10,12 +10,369 @@
 
 
     <LinearLayout
+        android:id="@+id/scores_history_list_item_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/secondaryAppColor"
         android:orientation="vertical">
 
-        <TextView
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:stretchColumns="*"
+            android:shrinkColumns="*">
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_match_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Chennai Super Kings vs Mumbai Indians"
+                    style="@style/MainAppHeaders"
+                    android:background="@color/mainAppColor"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_match_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="27/05/2015 8:40 PM"
+                    style="@style/SubHeaders"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Category"
+                    style="@style/Labels"
+                    android:textStyle="bold"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Player"
+                    style="@style/Labels"
+                    android:textStyle="bold"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Points"
+                    style="@style/Labels"
+                    android:textStyle="bold"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:text="Batsman 1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_batsman1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_batsman1_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:text="Batsman 2"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_batsman2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_batsman2_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:text="Bowler 1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_bowler1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_bowler1_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:text="Bowler 2"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_bowler2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_bowler2_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:text="MoM 1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_mom1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_mom1_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:text="MoM 2"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_mom2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_mom2_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:text="Winner"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_match_winner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_match_winner_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="textStart"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_toss_winner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="Player"
+                    style="@style/Labels"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_toss_winner_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Total Points"
+                    style="@style/Labels"
+                    android:textStyle="bold"
+                    android:layout_weight="4"/>
+
+                <TextView
+                    android:id="@+id/scores_history_list_item_total_points"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    tools:text="1"
+                    style="@style/Labels"
+                    android:textStyle="bold"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+
+
+            <TextView
+                android:id="@+id/scores_history_list_item_top_scored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SubHeaders"
+                tools:text="Top scored in this match!"
+                android:layout_marginTop="16dp"/>
+
+
+        </TableLayout>
+
+
+        <!--<TextView
             android:id="@+id/scores_history_list_item_match_name"
             android:layout_width="match_parent"
             style="@style/MainAppHeaders"
@@ -38,6 +395,9 @@
                 style="@style/SubHeaders"
                 tools:text="27/05/2015 8:40 PM"
                 android:textAlignment="center" />
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -385,59 +745,11 @@
                 android:layout_marginTop="16dp"/>
 
 
-            <!--<Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Compare"
-                android:id="@+id/fragment_compare_button"/>
-
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Rank"
-                        android:layout_margin="8dp"
-                        style="@style/Labels"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Name"
-                        android:layout_margin="8dp"
-                        style="@style/Labels"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Total Points"
-                        android:layout_margin="8dp"
-                        style="@style/Labels"/>
-
-                </TableRow>
-
-                <ListView
-                    android:id="@+id/compare_list_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/secondaryAppColor"
-                    android:orientation="vertical"/>
-
-            </TableLayout> -->
 
 
 
 
-
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 

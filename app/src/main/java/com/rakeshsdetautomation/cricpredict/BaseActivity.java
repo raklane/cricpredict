@@ -1,6 +1,7 @@
 package com.rakeshsdetautomation.cricpredict;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,10 +19,15 @@ import com.rakeshsdetautomation.cricpredict.loginandregistration.MainActivity;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected FirebaseAuth mAuth;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String KEY = "key";
+    public static SharedPreferences sharedPreferences;
 
 
 
     protected void logout() {
+
+        getApplicationContext().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE).edit().clear().commit();
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -40,5 +46,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

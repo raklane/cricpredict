@@ -65,9 +65,7 @@ import java.util.TimeZone;
 public class HomeScreenActivity extends BaseActivity implements View.OnClickListener {
 
     private NotificationManagerCompat notificationManagerCompat;
-    SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "MyPrefs";
-    public static final String KEY = "key";
+
 
     public static final String TAG = "HomeScreenActivity";
     private String name;
@@ -109,8 +107,6 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.home_screen_layout);
 
         mAuth = FirebaseAuth.getInstance();
-
-        sharedPreferences = this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -154,7 +150,7 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
 
         System.out.println(BaseClass.userString);
         //Set welcome message
-        homeScreenTitle.setText("Welcome " + name + "!");
+        //homeScreenTitle.setText("Welcome " + name + "!");
 
 
         HomeScreenDataLoadAsyncTaskRunner homeScreenDataLoadAsyncTaskRunner = new HomeScreenDataLoadAsyncTaskRunner();
@@ -169,9 +165,16 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
             }
         });
 
+        onStart();
 
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+        finish();
     }
 
     @Override
@@ -213,13 +216,12 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
                         name = userProfile.fullName;
                         email = userProfile.email;
 
-
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("name", name);
                         editor.putString("email", email);
                         editor.apply();
 
-                        //homeScreenTitle.setText("Welcome " + name + "!");
+                        homeScreenTitle.setText("Welcome " + sharedPreferences.getString("name", null) + "!");
 
                     }
                 }
@@ -229,8 +231,6 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
                     Toast.makeText(HomeScreenActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
                 }
             });
-            Log.i(TAG, name + "----" + email);
-            homeScreenTitle.setText("Welcome " + sharedPreferences.getString("name", null) + "!");
             return;
 
         }
@@ -240,8 +240,8 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
             name = account.getDisplayName();
             email = account.getEmail();
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(KEY, name);
-            editor.putString(KEY, email);
+            editor.putString("name", name);
+            editor.putString("email", email);
             editor.commit();
             //homeScreenTitle.setText("Welcome " + name + "!");
             homeScreenTitle.setText("Welcome " + sharedPreferences.getString("name", null) + "!");

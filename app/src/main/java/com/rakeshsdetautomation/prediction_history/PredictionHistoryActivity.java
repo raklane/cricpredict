@@ -1,21 +1,24 @@
 package com.rakeshsdetautomation.prediction_history;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.rakeshsdetautomation.cricpredict.BaseActivity;
-import com.rakeshsdetautomation.cricpredict.LeadershipBoardActivity;
 import com.rakeshsdetautomation.cricpredict.R;
 import com.rakeshsdetautomation.cricpredict.constants.BaseClass;
 import com.rakeshsdetautomation.cricpredict.loginandregistration.HomeScreenActivity;
@@ -27,12 +30,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TimeZone;
 
 public class PredictionHistoryActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final String TAG = "PredictionHistoryActiv";
     String userId;
+    private Spinner matchSpinner;
+    private ListView predictionHistoryListView;
+    private PredictionHistoryAdapter predictionHistoryAdapter;
     ArrayList<PredictionHistory> predictionHistoryArrayList = new ArrayList<PredictionHistory>();
+
+    Set<String> teamNamesForSpinner = new HashSet<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +53,50 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        matchSpinner = (Spinner) findViewById(R.id.prediction_history_spinner) ;
+        predictionHistoryListView = (ListView) findViewById(R.id.predictions_scores_history_list);
+
         userId = getIntent().getStringExtra("userId");
 
         PredictionHistoryActivityAsyncTaskRunner predictionHistoryActivityAsyncTaskRunner = new PredictionHistoryActivityAsyncTaskRunner();
         predictionHistoryActivityAsyncTaskRunner.execute();
+
+    }
+
+    private void initializeSpinner() {
+
+        String[] teamNamesArrayForSpinner = teamNamesForSpinner.toArray(new String[teamNamesForSpinner.size()]);
+        matchSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ArrayUtils.concat(new String[]{"All Matches"}, teamNamesArrayForSpinner)));
+
+        matchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedTeamName = matchSpinner.getItemAtPosition(position).toString();
+                getSelectedMatchListItem(selectedTeamName);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    private void getSelectedMatchListItem(String selectedTeamName) {
+
+        if(selectedTeamName == "All Matches"){
+            predictionHistoryListView.setAdapter(new PredictionHistoryAdapter(PredictionHistoryActivity.this, predictionHistoryArrayList));
+        }else{
+            ArrayList<PredictionHistory> teamPredictionHistoryArrayList = new ArrayList<PredictionHistory>();
+            for(PredictionHistory predictionHistory : predictionHistoryArrayList){
+                if(predictionHistory.getMatch_name().contains(selectedTeamName)){
+                    teamPredictionHistoryArrayList.add(predictionHistory);
+                }
+            }
+            predictionHistoryListView.setAdapter(new PredictionHistoryAdapter(PredictionHistoryActivity.this, teamPredictionHistoryArrayList));
+        }
+
     }
 
     @Override
@@ -76,9 +127,9 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
 
         @Override
         protected void onPostExecute(String s) {
-            PredictionHistoryAdapter predictionHistoryAdapter = new PredictionHistoryAdapter(PredictionHistoryActivity.this, predictionHistoryArrayList);
-            ListView predictionHistoryListView = (ListView) findViewById(R.id.predictions_scores_history_list);
+            predictionHistoryAdapter = new PredictionHistoryAdapter(PredictionHistoryActivity.this, predictionHistoryArrayList);
             predictionHistoryListView.setAdapter(predictionHistoryAdapter);
+            initializeSpinner();
             progressDialog.dismiss();
         }
     }
@@ -92,12 +143,6 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
 
             JSONObject participantJsonObj = new JSONObject(participantString);
             BaseClass.currentParticipantTabbedScores = participantJsonObj;
-
-                    /*JSONArray jsonArray = BaseClass.currentParticipantTabbedScores.getJSONArray("participantPredictions");
-                    if(jsonArray.length() == 0){
-                        Toast.makeText(LeadershipBoardActivity.this, "User has never predicted!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }*/
 
 
             Date currentTimeZoneDate = Calendar.getInstance(TimeZone.getDefault()).getTime();
@@ -134,6 +179,9 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
                     predictionHistory.setMatch_name(currentMatchJsonObj.getString("team1Name") + " vs " +
                             currentMatchJsonObj.getString("team2Name"));
                     predictionHistory.setMatch_date(simpleDateFormat.format(matchStartTime));
+                    teamNamesForSpinner.add(currentMatchJsonObj.getString("team1Name"));
+                    teamNamesForSpinner.add(currentMatchJsonObj.getString("team2Name"));
+
 
                     String batsman1 = ((JSONObject) jsonArray.get(i)).getString("batsmen").split(",")[0];
                     String batsman2 = ((JSONObject) jsonArray.get(i)).getString("batsmen").split(",")[1];
@@ -181,8 +229,6 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
 
 
             }
-
-
 
 
         }catch (Exception e){

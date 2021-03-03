@@ -18,11 +18,19 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:id="@+id/prediction_history_spinner"
+        android:layout_gravity="center_horizontal"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/colorWhite"
+        android:paddingTop="16dp"
         android:id="@+id/predictions_scores_history_list">
 
     </ListView>
