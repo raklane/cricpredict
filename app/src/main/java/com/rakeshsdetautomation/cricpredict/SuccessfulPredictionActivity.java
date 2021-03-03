@@ -1,11 +1,15 @@
 package com.rakeshsdetautomation.cricpredict;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,7 +20,7 @@ import com.rakeshsdetautomation.cricpredict.loginandregistration.HomeScreenActiv
 
 import org.json.JSONObject;
 
-public class SuccessfulPredictionActivity extends AppCompatActivity {
+public class SuccessfulPredictionActivity extends BaseActivity implements View.OnClickListener {
 
     TextView screen_title;
     TextView batsman1_text_view;
@@ -49,6 +53,9 @@ public class SuccessfulPredictionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_successful_prediction);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         batsman1_text_view = (TextView) findViewById(R.id.successful_prediction_batsman_1);
         batsman2_text_view = (TextView) findViewById(R.id.successful_prediction_batsman_2);
         bowler1_text_view = (TextView) findViewById(R.id.successful_prediction_bowler_1);
@@ -79,6 +86,15 @@ public class SuccessfulPredictionActivity extends AppCompatActivity {
         FillUpSuccessfulPredictionAsyncTask fillUpSuccessfulPredictionAsyncTask = new FillUpSuccessfulPredictionAsyncTask();
         fillUpSuccessfulPredictionAsyncTask.execute();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.banner:
+                startActivity(new Intent(this, HomeScreenActivity.class));
+                break;
+        }
     }
 
     private void editPredition(){
@@ -189,5 +205,27 @@ public class SuccessfulPredictionActivity extends AppCompatActivity {
         Intent homeScreenIntent = new Intent(SuccessfulPredictionActivity.this, HomeScreenActivity.class);
         homeScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivityIfNeeded(homeScreenIntent, 0);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cricpredict_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logout_link:
+                logout();
+                break;
+            case R.id.milestones:
+                //write code for milestones
+                break;
+            case R.id.settings:
+                //write code for settings
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

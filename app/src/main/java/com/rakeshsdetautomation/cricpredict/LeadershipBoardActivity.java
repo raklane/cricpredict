@@ -1,11 +1,15 @@
 package com.rakeshsdetautomation.cricpredict;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rakeshsdetautomation.cricpredict.constants.BaseClass;
+import com.rakeshsdetautomation.cricpredict.loginandregistration.HomeScreenActivity;
 import com.rakeshsdetautomation.cricpredict.users.Participant;
 import com.rakeshsdetautomation.prediction_history.PredictionHistory;
 import com.rakeshsdetautomation.prediction_history.PredictionHistoryActivity;
@@ -28,12 +33,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class LeadershipBoardActivity extends AppCompatActivity {
+public class LeadershipBoardActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leadership_board);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         int totalMatches = 10;
         TextView totalMatchesView = (TextView) findViewById(R.id.total_matches_view);
@@ -42,6 +50,15 @@ public class LeadershipBoardActivity extends AppCompatActivity {
         LeadershipBoardAsyncTaskRunner leadershipBoardAsyncTaskRunner = new LeadershipBoardAsyncTaskRunner();
         leadershipBoardAsyncTaskRunner.execute();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.banner:
+                startActivity(new Intent(this, HomeScreenActivity.class));
+                break;
+        }
     }
 
     private class LeadershipBoardAsyncTaskRunner extends AsyncTask<String, String, String>{
@@ -110,5 +127,27 @@ public class LeadershipBoardActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cricpredict_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logout_link:
+                logout();
+                break;
+            case R.id.milestones:
+                //write code for milestones
+                break;
+            case R.id.settings:
+                //write code for settings
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

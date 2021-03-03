@@ -1,11 +1,15 @@
 package com.rakeshsdetautomation.cricpredict;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PredictionActivity extends AppCompatActivity {
+public class PredictionActivity extends BaseActivity implements View.OnClickListener {
 
     Spinner batsman1_spinner_view;
     Spinner batsman2_spinner_view;
@@ -50,6 +54,9 @@ public class PredictionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         matchId = getIntent().getIntExtra("matchId", 11111);
         team1Name = getIntent().getStringExtra("team1Name");
@@ -96,6 +103,15 @@ public class PredictionActivity extends AppCompatActivity {
         FillDropdownDataAyncTaskRunner fillDropdownDataAyncTaskRunner = new FillDropdownDataAyncTaskRunner();
         fillDropdownDataAyncTaskRunner.execute();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.banner:
+                startActivity(new Intent(this, HomeScreenActivity.class));
+                break;
+        }
     }
 
 
@@ -303,6 +319,28 @@ public class PredictionActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cricpredict_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logout_link:
+                logout();
+                break;
+            case R.id.milestones:
+                //write code for milestones
+                break;
+            case R.id.settings:
+                //write code for settings
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

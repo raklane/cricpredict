@@ -3,7 +3,9 @@ package com.rakeshsdetautomation.cricpredict.loginandregistration;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -42,6 +44,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rakeshsdetautomation.cricpredict.App;
+import com.rakeshsdetautomation.cricpredict.BaseActivity;
 import com.rakeshsdetautomation.cricpredict.LeadershipBoardActivity;
 import com.rakeshsdetautomation.cricpredict.PredictionActivity;
 import com.rakeshsdetautomation.cricpredict.R;
@@ -59,9 +62,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class HomeScreenActivity extends BaseActivity implements View.OnClickListener {
 
     private NotificationManagerCompat notificationManagerCompat;
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String KEY = "key";
 
     public static final String TAG = "HomeScreenActivity";
     private String name;
@@ -71,7 +77,6 @@ public class HomeScreenActivity extends AppCompatActivity {
     TextView totalPoints;
     TextView totalMatches;
     TextView totalMatchesPlayed;
-    private FirebaseAuth mAuth;
 
 
     LinearLayout firstMatch;
@@ -96,6 +101,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     private String email;
 
 
+
     //@RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +109,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.home_screen_layout);
 
         mAuth = FirebaseAuth.getInstance();
+
+        sharedPreferences = this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -167,45 +175,6 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        user = mAuth.getCurrentUser();
-        if(user != null){
-
-            reference = FirebaseDatabase.getInstance().getReference("Users");
-            userId = user.getUid();
-
-            reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    User userProfile = snapshot.getValue(User.class);
-                    if(userProfile != null){
-                        name = userProfile.fullName;
-                        email = userProfile.email;
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(HomeScreenActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
-                }
-            });
-            homeScreenTitle.setText("Welcome " + name + "!");
-
-            return;
-
-        }
-
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null){
-            name = account.getDisplayName();
-            email = account.getEmail();
-            homeScreenTitle.setText("Welcome " + name + "!");
-            return;
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cricpredict_menu_items, menu);
         return super.onCreateOptionsMenu(menu);
@@ -227,24 +196,68 @@ public class HomeScreenActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void logout() {
-
-        FirebaseUser user = mAuth.getCurrentUser();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user = mAuth.getCurrentUser();
         if(user != null){
-            mAuth.signOut();
-            Intent mainScreenIntent = new Intent(HomeScreenActivity.this, MainActivity.class);
-            startActivity(mainScreenIntent);
+
+            reference = FirebaseDatabase.getInstance().getReference("Users");
+            userId = user.getUid();
+
+            reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    User userProfile = snapshot.getValue(User.class);
+                    if(userProfile != null){
+                        name = userProfile.fullName;
+                        email = userProfile.email;
+
+
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("name", name);
+                        editor.putString("email", email);
+                        editor.apply();
+
+                        //homeScreenTitle.setText("Welcome " + name + "!");
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(HomeScreenActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
+                }
+            });
+            Log.i(TAG, name + "----" + email);
+            homeScreenTitle.setText("Welcome " + sharedPreferences.getString("name", null) + "!");
             return;
+
         }
 
-        BaseClass.mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Intent mainScreenIntent = new Intent(HomeScreenActivity.this, MainActivity.class);
-                startActivity(mainScreenIntent);
-            }
-        });
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null){
+            name = account.getDisplayName();
+            email = account.getEmail();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(KEY, name);
+            editor.putString(KEY, email);
+            editor.commit();
+            //homeScreenTitle.setText("Welcome " + name + "!");
+            homeScreenTitle.setText("Welcome " + sharedPreferences.getString("name", null) + "!");
+            return;
+        }
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.banner:
+                startActivity(new Intent(this, HomeScreenActivity.class));
+                break;
+        }
+    }
+
 
     private class HomeScreenDataLoadAsyncTaskRunner extends AsyncTask<String, String, String>{
 

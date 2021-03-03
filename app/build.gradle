@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.firebase:firebase-client-android:2.5.0'
+    implementation 'com.google.android.gms:play-services-basement:17.5.0'
     //implementation 'com.google.firebase:firebase-admin:7.0.0'
 
 

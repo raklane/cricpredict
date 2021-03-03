@@ -17,9 +17,8 @@
 
     <style name="MainAppHeadersLarge">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_height">80dp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center</item>
     </style>

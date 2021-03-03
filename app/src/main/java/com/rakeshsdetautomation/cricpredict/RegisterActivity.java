@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rakeshsdetautomation.cricpredict.constants.BaseClass;
 import com.rakeshsdetautomation.cricpredict.loginandregistration.MainActivity;
@@ -31,7 +32,7 @@ import java.io.IOException;
 import android.util.Patterns;
 import android.widget.Toast;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     EditText emailEditView;
     EditText passwordEditView;
@@ -122,6 +123,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         }
                                     });
                         }else {
+                            try{
+                                throw task.getException();
+                            }catch (Exception e){
+                                if(e instanceof FirebaseAuthUserCollisionException) {
+                                    Toast.makeText(RegisterActivity.this, "Email already exists. Try forgot password.", Toast.LENGTH_LONG).show();
+                                    progressBar.setVisibility(View.GONE);
+                                    return;
+                                }
+                            }
+
                             Toast.makeText(RegisterActivity.this, "Failed to registered. Try again", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);}
                     }

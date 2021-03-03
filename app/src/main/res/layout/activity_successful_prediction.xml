@@ -8,6 +8,18 @@
     android:background="@color/secondaryAppColor"
     tools:context=".SuccessfulPredictionActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="0dp"
+        android:background="@color/mainAppColor"
+        android:title="@string/app_name">
+
+        <include layout="@layout/banner"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <TextView
         android:id="@+id/successful_prediction_screen_title"
         android:layout_width="match_parent"

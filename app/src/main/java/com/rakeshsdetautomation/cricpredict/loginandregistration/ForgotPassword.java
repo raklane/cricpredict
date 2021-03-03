@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.rakeshsdetautomation.cricpredict.BaseActivity;
 import com.rakeshsdetautomation.cricpredict.R;
 
 import android.content.Intent;
@@ -17,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class ForgotPassword extends AppCompatActivity implements View.OnClickListener {
+public class ForgotPassword extends BaseActivity implements View.OnClickListener {
 
     private EditText emailEdit;
     private Button resetPassword;

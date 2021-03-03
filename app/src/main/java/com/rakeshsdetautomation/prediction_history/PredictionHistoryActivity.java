@@ -1,16 +1,24 @@
 package com.rakeshsdetautomation.prediction_history;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.rakeshsdetautomation.cricpredict.BaseActivity;
 import com.rakeshsdetautomation.cricpredict.LeadershipBoardActivity;
 import com.rakeshsdetautomation.cricpredict.R;
 import com.rakeshsdetautomation.cricpredict.constants.BaseClass;
+import com.rakeshsdetautomation.cricpredict.loginandregistration.HomeScreenActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class PredictionHistoryActivity extends AppCompatActivity {
+public class PredictionHistoryActivity extends BaseActivity implements View.OnClickListener {
 
     String userId;
     ArrayList<PredictionHistory> predictionHistoryArrayList = new ArrayList<PredictionHistory>();
@@ -31,10 +39,22 @@ public class PredictionHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.predictions_scores_history_list);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         userId = getIntent().getStringExtra("userId");
 
         PredictionHistoryActivityAsyncTaskRunner predictionHistoryActivityAsyncTaskRunner = new PredictionHistoryActivityAsyncTaskRunner();
         predictionHistoryActivityAsyncTaskRunner.execute();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.banner:
+                startActivity(new Intent(this, HomeScreenActivity.class));
+                break;
+        }
     }
 
 
@@ -170,5 +190,27 @@ public class PredictionHistoryActivity extends AppCompatActivity {
             Toast.makeText(PredictionHistoryActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cricpredict_menu_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logout_link:
+                logout();
+                break;
+            case R.id.milestones:
+                //write code for milestones
+                break;
+            case R.id.settings:
+                //write code for settings
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
