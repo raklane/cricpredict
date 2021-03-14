@@ -43,7 +43,6 @@ public class LeadershipBoardActivity extends BaseActivity implements View.OnClic
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        int totalMatches = 10;
         TextView totalMatchesView = (TextView) findViewById(R.id.total_matches_view);
         totalMatchesView.setText("Total Matches: " + BaseClass.totalNumberOfMatches);
 
@@ -120,11 +119,6 @@ public class LeadershipBoardActivity extends BaseActivity implements View.OnClic
                 predictionHistoryActivityIntent.putExtra("userId", userId);
                 startActivity(predictionHistoryActivityIntent);
 
-
-
-                /*Intent predictionsScoresIntent = new Intent(LeadershipBoardActivity.this, PredictionScores.class);
-                startActivity(predictionsScoresIntent);*/
-
             }
         });
     }
@@ -142,7 +136,7 @@ public class LeadershipBoardActivity extends BaseActivity implements View.OnClic
                 logout();
                 break;
             case R.id.milestones:
-                //write code for milestones
+                milestones();
                 break;
             case R.id.settings:
                 //write code for settings

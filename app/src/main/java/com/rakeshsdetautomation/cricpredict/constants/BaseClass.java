@@ -45,6 +45,7 @@ public class BaseClass {
     public static String resourceParticipantEditPrediction ="v1/participants/editPrediction/";
     public static String resourceParticipantPrediction = "v1/participants/participantprediction/";
     public static String resourceParticipant = "v1/participants/";
+    public static String resourceMilestones = "v1/pointscalculator/milestonesboard";
 
     public static GoogleSignInClient mGoogleSignInClient;
 

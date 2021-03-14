@@ -251,7 +251,7 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
                 logout();
                 break;
             case R.id.milestones:
-                //write code for milestones
+                milestones();
                 break;
             case R.id.settings:
                 //write code for settings

@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/cricpredict_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".loginandregistration.ForgotPassword"></activity>
+        <activity android:name=".MilestonesBoard"></activity>
+        <activity android:name=".loginandregistration.ForgotPassword" />
         <activity android:name="com.rakeshsdetautomation.prediction_history.PredictionHistoryActivity" />
         <activity android:name=".MatchStoreBoard" />
         <activity android:name=".SuccessfulPredictionActivity" />

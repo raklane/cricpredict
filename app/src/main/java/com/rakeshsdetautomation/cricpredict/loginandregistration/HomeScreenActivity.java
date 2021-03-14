@@ -190,7 +190,7 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
                 logout();
                 break;
             case R.id.milestones:
-                //write code for milestones
+                milestones();
                 break;
             case R.id.settings:
                 //write code for settings
@@ -335,25 +335,6 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
         }
 
         rank_int = currentParticipantRank;
-
-        /*try {
-            if(currentParticipantRank > 0){
-                rank.setText(Integer.toString(currentParticipantRank));
-            }else{
-                rank.setText("--");
-            }
-
-            totalPoints.setText(Integer.toString(BaseClass.userString.getInt("pointsCollected")));
-            totalMatchesPlayed.setText(Integer.toString(BaseClass.userString.getInt("matchesParticipated")));
-
-            //sendLeadershipReminderChannelNotification("Your rank is " + (currentParticipantRank>0?currentParticipantRank:"--"),
-            //        "You have collected " + BaseClass.userString.getInt("pointsCollected") + " points.");
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "ServerError:Unable to parse user json", Toast.LENGTH_SHORT).show();
-            Intent mainScreenIntent = new Intent(HomeScreenActivity.this, MainActivity.class);
-            startActivity(mainScreenIntent);
-        }*/
     }
 
 

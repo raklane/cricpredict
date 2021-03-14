@@ -47,5 +47,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
+    protected void milestones() {
+
+        Intent milestonesIntent = new Intent(getApplicationContext(), MilestonesBoard.class);
+        startActivity(milestonesIntent);
+
+    }
+
 
 }
