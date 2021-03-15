@@ -45,209 +45,164 @@
                 android:background="@color/mainAppColor"/>
 
 
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:stretchColumns="*"
+                android:shrinkColumns="*">
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tap icons to see Point Calculation rules"
+                        android:gravity="center_horizontal"
+                        style="@style/Labels"
+                        android:layout_marginBottom="16dp"
+                        android:textStyle="bold"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_batsman_1_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_vector_batsman"/>
+
+                    <Spinner
+                        android:id="@+id/batsman_1_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_batsman_2_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_vector_batsman"/>
+
+                    <Spinner
+                        android:id="@+id/batsman_2_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_bowler_1_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_vector_bowler"/>
+
+                    <Spinner
+                        android:id="@+id/bowler_1_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_bowler_2_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_vector_bowler"/>
+
+                    <Spinner
+                        android:id="@+id/bowler_2_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_mom_1_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_mom"/>
+
+                    <Spinner
+                        android:id="@+id/manofthematch_1_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_mom_2_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_mom"/>
+
+                    <Spinner
+                        android:id="@+id/manofthematch_2_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_winner_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_winner"/>
+
+                    <Spinner
+                        android:id="@+id/match_winning_team_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <ImageView
+                        android:id="@+id/prediction_toss_icon"
+                        style="@style/PredictionIcons"
+                        android:src="@drawable/ic_toss"/>
+
+                    <Spinner
+                        android:id="@+id/toss_winning_team_spinner"
+                        style="@style/PredictionSpinner" />
+
+                </TableRow>
+
+
+
+            </TableLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Team 1 Batsman"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/batsman_1_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Team 2 Batsman"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/batsman_2_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Team 1 Bowler"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/bowler_1_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"  />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Team 2 Bowler"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/bowler_2_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"  />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Team 1 MoM"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/manofthematch_1_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"  />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Team 2 MoM"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/manofthematch_2_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"  />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Winning Team"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/match_winning_team_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"  />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                style="@style/Labels"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:layout_height="wrap_content"
-                                android:text="Toss Winning Team"
-                                android:textAlignment="textEnd" />
-
-                            <Spinner
-                                android:id="@+id/toss_winning_team_spinner"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"  />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/prediction_error"
@@ -266,212 +221,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Submit Prediction" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
 
-                    <TextView
-                        style="@style/SubHeaders"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:text="Points Calculation Rules"
-                        android:textAlignment="center" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/Labels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
-                            android:text="Batsman"
-                            android:textAlignment="textStart" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="2.5"
-                            android:orientation="vertical">
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="1 Run : 2 Points" />
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="1 Four : 4 Points (Bonus)" />
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="1 Six : 6 Points (Bonus)" />
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Half-Century : 50 Points (Bonus)" />
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Century : 120 Points (Bonus)" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/Labels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
-                            android:text="Bowler"
-                            android:textAlignment="textStart" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="2.5"
-                            android:orientation="vertical">
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="1 Wicket : 30 Points" />
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="3 Wicket-haul : 50 Points (Bonus)" />
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="5 Wicket-haul : 120 Points (Bonus)" />
-
-                            <TextView
-                                style="@style/SubLabels"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Maiden Over : 30 Points" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/Labels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
-                            android:text="MOM"
-                            android:textAlignment="textStart" />
-
-                        <TextView
-                            style="@style/SubLabels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="2.5"
-                            android:text="100 Points (If either of selected players wins MoM)" />
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/Labels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
-                            android:text="Match Winner"
-                            android:textAlignment="textStart" />
-
-                        <TextView
-                            style="@style/SubLabels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="2.5"
-                            android:text="50 Points" />
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/Labels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
-                            android:text="Toss Winner"
-                            android:textAlignment="textStart" />
-
-                        <TextView
-                            style="@style/SubLabels"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="2.5"
-                            android:text="30 Points" />
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
 
 
             </LinearLayout>

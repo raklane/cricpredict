@@ -34,174 +34,162 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <TextView
+
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Successful Prediction!"
-            android:textAlignment="center"
-            style="@style/SubHeaders"
-            android:layout_margin="16dp"/>
+            android:gravity="center"
+            android:orientation="vertical"
+            android:stretchColumns="*"
+            android:shrinkColumns="*">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="0dp"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Successful Prediction!"
+                    android:textAlignment="center"
+                    style="@style/SubHeaders"
+                    android:layout_margin="16dp"/>
+
+            </TableRow>
+
+
+            <TableRow android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
                 android:layout_margin="8dp">
 
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Team 1 Batsman"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Team 2 Batsman"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Team 1 Bowler"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Team 2 Bowler"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Team 1 MoM"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Team 2 MoM"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Winning Team"
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    style="@style/Labels"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Toss Winning Team"
-                    android:textAlignment="textEnd" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.3"
-                android:orientation="vertical"
-                android:layout_margin="8dp">
+                <ImageView
+                    android:id="@+id/successful_prediction_batsman_1_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_vector_batsman"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_batsman_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
-                    tools:text="Batsman 1"
-                    android:textAlignment="textStart"/>
+                    style="@style/SuccessfulPredictionNames"
+                    tools:text="Batsman 1" />
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/successful_prediction_batsman_2_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_vector_batsman"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_batsman_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
                     tools:text="Batsman 2"
-                    android:textAlignment="textStart"
-                    android:layout_marginTop="8dp"/>
+                    style="@style/SuccessfulPredictionNames"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/successful_prediction_bowler_1_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_vector_bowler"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_bowler_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
                     tools:text="Bowler 1"
-                    android:textAlignment="textStart"
-                    android:layout_marginTop="8dp"/>
+                    style="@style/SuccessfulPredictionNames"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/successful_prediction_bowler_2_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_vector_bowler"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_bowler_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
                     tools:text="Bowler 2"
-                    android:textAlignment="textStart"
-                    android:layout_marginTop="8dp"/>
+                    style="@style/SuccessfulPredictionNames"/>
+
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/successful_prediction_mom_1_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_mom"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_mom_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
-                    tools:text="Man Of The Match 1"
-                    android:textAlignment="textStart"
-                    android:layout_marginTop="8dp"/>
+                    style="@style/SuccessfulPredictionNames"
+                    tools:text="Man Of The Match 1"/>
+
+            </TableRow>
+
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/successful_prediction_mom_2_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_mom"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_mom_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
-                    tools:text="Man Of The Match 2"
-                    android:textAlignment="textStart"
-                    android:layout_marginTop="8dp"/>
+                    style="@style/SuccessfulPredictionNames"
+                    tools:text="Man Of The Match 2"/>
+
+            </TableRow>
+
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/successful_prediction_winner_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_winner"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_match_winner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
-                    tools:text="Match Winner"
-                    android:textAlignment="textStart"
-                    android:layout_marginTop="8dp"/>
+                    style="@style/SuccessfulPredictionNames"
+                    tools:text="Match Winner"/>
+
+            </TableRow>
+
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/successful_prediction_toss_icon"
+                    style="@style/PredictionIcons"
+                    android:src="@drawable/ic_toss"/>
 
                 <TextView
                     android:id="@+id/successful_prediction_toss_winner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Labels"
-                    tools:text="Toss Winner"
-                    android:textAlignment="textStart"
-                    android:layout_marginTop="8dp"/>
+                    style="@style/SuccessfulPredictionNames"
+                    tools:text="Toss Winner"/>
 
-            </LinearLayout>
+            </TableRow>
 
 
-        </LinearLayout>
+        </TableLayout>
 
         <Button
             android:id="@+id/successful_prediction_edit_prediction_button"

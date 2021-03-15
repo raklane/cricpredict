@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ import java.util.TimeZone;
 
 public class LeadershipBoardActivity extends BaseActivity implements View.OnClickListener {
 
+    LinearLayout banner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,9 @@ public class LeadershipBoardActivity extends BaseActivity implements View.OnClic
 
         LeadershipBoardAsyncTaskRunner leadershipBoardAsyncTaskRunner = new LeadershipBoardAsyncTaskRunner();
         leadershipBoardAsyncTaskRunner.execute();
+
+        banner = (LinearLayout) findViewById(R.id.banner);
+        banner.setOnClickListener(this);
 
     }
 

@@ -4,15 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +32,7 @@ import java.util.List;
 
 public class PredictionActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final String TAG = "PredictionActivity";
     Spinner batsman1_spinner_view;
     Spinner batsman2_spinner_view;
     Spinner bowler1_spinner_view;
@@ -40,6 +45,16 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
     Button perdiction_submit_button_view;
     TextView prediction_error_text_view;
 
+    LinearLayout banner;
+    ImageView batsman1_icon;
+    ImageView batsman2_icon;
+    ImageView bowler1_icon;
+    ImageView bowler2_icon;
+    ImageView mom1_icon;
+    ImageView mom2_icon;
+    ImageView winner_icon;
+    ImageView toss_icon;
+
     int matchId;
     String team1Name;
     String team2Name;
@@ -49,6 +64,20 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
     ArrayAdapter<String> adapterPlayers1;
     ArrayAdapter<String> adapterPlayers2;
     ArrayAdapter<String> teamAdapter;
+
+    String batsman_rules = "1 Run : 2 Points" + "\n" +
+            "1 Four : 4 Points (Bonus)" + "\n" +
+            "1 Six : 6 Points (Bonus)" + "\n" +
+            "Half-Century : 50 Points (Bonus)" + "\n" +
+            "Century : 120 Points (Bonus)";
+    String bowler_rules = "1 Wicket : 30 Points" + "\n" +
+            "3 Wicket-haul : 50 Points (Bonus)" + "\n" +
+            "5 Wicket-haul : 120 Points (Bonus)" + "\n" +
+            "Maiden Over : 30 Points";
+    String mom_rules = "100 Points (If a selected player from either teams wins MoM)";
+    String winner_rules = "50 Points";
+    String toss_rules = "30 Points";
+
 
 
     @Override
@@ -89,7 +118,25 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
         perdiction_submit_button_view = (Button) findViewById(R.id.prediction_submit_button);
         prediction_error_text_view = (TextView) findViewById(R.id.prediction_error);
 
+        banner = (LinearLayout) findViewById(R.id.banner);
+        batsman1_icon = (ImageView) findViewById(R.id.prediction_batsman_1_icon);
+        batsman2_icon = (ImageView) findViewById(R.id.prediction_batsman_2_icon);
+        bowler1_icon = (ImageView) findViewById(R.id.prediction_bowler_1_icon);
+        bowler2_icon = (ImageView) findViewById(R.id.prediction_bowler_2_icon);
+        mom1_icon = (ImageView) findViewById(R.id.prediction_mom_1_icon);
+        mom2_icon = (ImageView) findViewById(R.id.prediction_mom_2_icon);
+        winner_icon = (ImageView) findViewById(R.id.prediction_winner_icon);
+        toss_icon = (ImageView) findViewById(R.id.prediction_toss_icon);
 
+        banner.setOnClickListener(this);
+        batsman1_icon.setOnClickListener(this);
+        batsman2_icon.setOnClickListener(this);
+        bowler1_icon.setOnClickListener(this);
+        bowler2_icon.setOnClickListener(this);
+        mom1_icon.setOnClickListener(this);
+        mom2_icon.setOnClickListener(this);
+        winner_icon.setOnClickListener(this);
+        toss_icon.setOnClickListener(this);
 
         perdiction_submit_button_view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,10 +145,10 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
             }
         });
 
-        //fill_dropdowns();
-
         FillDropdownDataAyncTaskRunner fillDropdownDataAyncTaskRunner = new FillDropdownDataAyncTaskRunner();
         fillDropdownDataAyncTaskRunner.execute();
+
+
 
     }
 
@@ -111,7 +158,41 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
             case R.id.banner:
                 startActivity(new Intent(this, HomeScreenActivity.class));
                 break;
+            case R.id.prediction_batsman_1_icon:
+                showAlertDialog("Team 1 Batsman", batsman_rules);
+                break;
+            case R.id.prediction_batsman_2_icon:
+                showAlertDialog("Team 2 Batsman", batsman_rules);
+                break;
+            case R.id.prediction_bowler_1_icon:
+                showAlertDialog("Team 1 Bowler", bowler_rules);
+                break;
+            case R.id.prediction_bowler_2_icon:
+                showAlertDialog("Team 2 Bowler", bowler_rules);
+                break;
+            case R.id.prediction_mom_1_icon:
+                showAlertDialog("Team 1 Man of the match", mom_rules);
+                break;
+            case R.id.prediction_mom_2_icon:
+                showAlertDialog("Team 2 Man of the match", mom_rules);
+                break;
+            case R.id.prediction_winner_icon:
+                showAlertDialog("Winning team", winner_rules);
+                break;
+            case R.id.prediction_toss_icon:
+                showAlertDialog("Toss Winner", toss_rules);
+                break;
         }
+    }
+
+    public void showAlertDialog(String category, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PredictionActivity.this);
+        builder.setTitle(category);
+        builder.setMessage(message);
+        builder.setCancelable(true);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
