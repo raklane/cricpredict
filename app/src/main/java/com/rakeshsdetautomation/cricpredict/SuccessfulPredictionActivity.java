@@ -66,10 +66,12 @@ public class SuccessfulPredictionActivity extends BaseActivity implements View.O
             "1 Six : 6 Points (Bonus)" + "\n" +
             "Half-Century : 50 Points (Bonus)" + "\n" +
             "Century : 120 Points (Bonus)";
-    String bowler_rules = "1 Wicket : 30 Points" + "\n" +
+    String bowler_rules = "1 Wicket : 40 Points" + "\n" +
+            "2 Wicket-haul : 30 Points (Bonus)" + "\n" +
             "3 Wicket-haul : 50 Points (Bonus)" + "\n" +
+            "4 Wicket-haul : 80 Points (Bonus)" + "\n" +
             "5 Wicket-haul : 120 Points (Bonus)" + "\n" +
-            "Maiden Over : 30 Points";
+            "Maiden Over : 40 Points";
     String mom_rules = "100 Points (If a selected player from either teams wins MoM)";
     String winner_rules = "50 Points";
     String toss_rules = "30 Points";

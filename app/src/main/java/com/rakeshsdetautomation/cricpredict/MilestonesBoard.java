@@ -90,8 +90,8 @@ public class MilestonesBoard extends BaseActivity  implements View.OnClickListen
                 milestoneListItems.add(milestonesItem);
             }
         } catch (JSONException e) {
-            Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT);
             e.printStackTrace();
+            Toast.makeText(this, "Server Error", Toast.LENGTH_SHORT);
         }
 
     }
@@ -107,9 +107,11 @@ public class MilestonesBoard extends BaseActivity  implements View.OnClickListen
                 MilestoneListItemClass milestoneListItem = milestoneListItems.get(position);
                 String userId = milestoneListItem.getUserId();
 
-                Intent predictionHistoryActivityIntent = new Intent(MilestonesBoard.this, PredictionHistoryActivity.class);
-                predictionHistoryActivityIntent.putExtra("userId", userId);
-                startActivity(predictionHistoryActivityIntent);
+                if(userId != "null"){
+                    Intent predictionHistoryActivityIntent = new Intent(MilestonesBoard.this, PredictionHistoryActivity.class);
+                    predictionHistoryActivityIntent.putExtra("userId", userId);
+                    startActivity(predictionHistoryActivityIntent);
+                }
 
             }
         });

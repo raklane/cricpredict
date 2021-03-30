@@ -374,6 +374,7 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
             JSONObject matchesJsonObj = new JSONObject(matchesString);
             BaseClass.matchesString = matchesJsonObj;
 
+
             JSONArray jsonArray = matchesJsonObj.getJSONArray("matches");
 
 //            Instant instant = Instant.now();

@@ -33,7 +33,7 @@ import okhttp3.Response;
 
 public class BaseClass {
 
-    public static String serviceUrl = "http://ec2-13-59-31-251.us-east-2.compute.amazonaws.com:8080/cricpredictapi/services/";
+    public static String serviceUrl = "http://ec2-3-129-112-126.us-east-2.compute.amazonaws.com:8080/cricpredictapi/services/";
     public static String resourceLogin = "v1/participants/login";
     public static String resourceLeadershipBoard = "v1/pointscalculator/leadershipboard";
     public static String resourceMatchStats = "v1/matchstats";

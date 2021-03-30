@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.util.ArrayUtils;
@@ -40,6 +41,7 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
     String userId;
     private Spinner matchSpinner;
     private ListView predictionHistoryListView;
+    private TextView predictionHistoryHeader;
     private PredictionHistoryAdapter predictionHistoryAdapter;
     ArrayList<PredictionHistory> predictionHistoryArrayList = new ArrayList<PredictionHistory>();
 
@@ -55,6 +57,7 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
 
         matchSpinner = (Spinner) findViewById(R.id.prediction_history_spinner) ;
         predictionHistoryListView = (ListView) findViewById(R.id.predictions_scores_history_list);
+        predictionHistoryHeader = (TextView) findViewById(R.id.prediction_history_header);
 
         userId = getIntent().getStringExtra("userId");
 
@@ -143,6 +146,9 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
 
             JSONObject participantJsonObj = new JSONObject(participantString);
             BaseClass.currentParticipantTabbedScores = participantJsonObj;
+
+            String nameOfTheParticipant = BaseClass.currentParticipantTabbedScores.getString("name");
+            predictionHistoryHeader.setText(nameOfTheParticipant + "'s predictions");
 
 
             Date currentTimeZoneDate = Calendar.getInstance(TimeZone.getDefault()).getTime();
