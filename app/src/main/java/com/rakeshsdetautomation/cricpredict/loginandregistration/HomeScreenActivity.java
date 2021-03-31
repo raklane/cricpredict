@@ -503,7 +503,7 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
                                 predictionIntent.putExtra("team1Name", BaseClass.todayMatchesId.get(0).getString("team1Name"));
                                 predictionIntent.putExtra("team2Name", BaseClass.todayMatchesId.get(0).getString("team2Name"));
                                 predictionIntent.putExtra("editMode", false);
-                                predictionIntent.putExtra("timeoutForPrediction", diff_hoursForInsideClass>BaseClass.predictionCutOffHours ? false : true );
+                                predictionIntent.putExtra("timeoutForPrediction", diff_hoursForInsideClass>=BaseClass.predictionCutOffHours ? false : true );
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -541,7 +541,7 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
                                 predictionIntent.putExtra("team1Name", BaseClass.todayMatchesId.get(1).getString("team1Name"));
                                 predictionIntent.putExtra("team2Name", BaseClass.todayMatchesId.get(1).getString("team2Name"));
                                 predictionIntent.putExtra("editMode", false);
-                                predictionIntent.putExtra("timeoutForPrediction", diff_hoursForInsideClass>BaseClass.predictionCutOffHours ? false : true );
+                                predictionIntent.putExtra("timeoutForPrediction", diff_hoursForInsideClass>=BaseClass.predictionCutOffHours ? false : true );
                                 notificationIntent[0] = predictionIntent;
                             } catch (JSONException e) {
                                 e.printStackTrace();

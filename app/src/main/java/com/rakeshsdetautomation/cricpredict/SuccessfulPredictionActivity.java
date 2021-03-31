@@ -182,7 +182,8 @@ public class SuccessfulPredictionActivity extends BaseActivity implements View.O
 
     private void editPredition(){
         try{
-            if(timeoutForPrediction == true){
+            //Check if prediction time is over
+            if(BaseClass.checkIfPredictionTimeIsOver(matchId)){
                 Toast.makeText(this, "Prediction time is over!", Toast.LENGTH_SHORT).show();
                 return;
             }

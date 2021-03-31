@@ -260,8 +260,6 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
 
         try{
 
-            //prediction_screen_title_view.setText(team1Name + " vs " + team2Name);
-
             String resourceTeamsTeam1 = BaseClass.resourceTeam + team1Name;
             String resourceTeamsTeam2 = BaseClass.resourceTeam + team2Name;
             String team2String = "";
@@ -279,9 +277,6 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
             playerStringArray = playerList.toArray(playerStringArray);
 
             adapterPlayers1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, playerStringArray);
-            /*batsman1_spinner_view.setAdapter(adapterPlayers1);
-            bowler1_spinner_view.setAdapter(adapterPlayers1);
-            manofthematch1_spinner_view.setAdapter(adapterPlayers1);*/
 
             //team 2
             team2String = BaseClass.getCall(BaseClass.serviceUrl + resourceTeamsTeam2);
@@ -298,34 +293,9 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
             playerStringArray = playerList.toArray(playerStringArray);
 
             adapterPlayers2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, playerStringArray);
-            /*batsman2_spinner_view.setAdapter(adapterPlayers2);
-            bowler2_spinner_view.setAdapter(adapterPlayers2);
-            manofthematch2_spinner_view.setAdapter(adapterPlayers2);*/
 
             String[] teamNameArray = {team1Name, team2Name};
             teamAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, teamNameArray);
-            /*match_winner_spinner_view.setAdapter(teamAdapter);
-            toss_winner_spinner_view.setAdapter(teamAdapter);*/
-
-            /*if(editMode == true){
-                int spinnerPosition = adapterPlayers1.getPosition(getIntent().getStringExtra("batsmen").split(",")[0]);
-                batsman1_spinner_view.setSelection(spinnerPosition);
-                spinnerPosition = adapterPlayers2.getPosition(getIntent().getStringExtra("batsmen").split(",")[1]);
-                batsman2_spinner_view.setSelection(spinnerPosition);
-                spinnerPosition = adapterPlayers1.getPosition(getIntent().getStringExtra("bowlers").split(",")[0]);
-                bowler1_spinner_view.setSelection(spinnerPosition);
-                spinnerPosition = adapterPlayers2.getPosition(getIntent().getStringExtra("bowlers").split(",")[1]);
-                bowler2_spinner_view.setSelection(spinnerPosition);
-                spinnerPosition = adapterPlayers1.getPosition(getIntent().getStringExtra("menOfTheMatch").split(",")[0]);
-                manofthematch1_spinner_view.setSelection(spinnerPosition);
-                spinnerPosition = adapterPlayers2.getPosition(getIntent().getStringExtra("menOfTheMatch").split(",")[1]);
-                manofthematch2_spinner_view.setSelection(spinnerPosition);
-                spinnerPosition = teamAdapter.getPosition(getIntent().getStringExtra("matchWinner"));
-                match_winner_spinner_view.setSelection(spinnerPosition);
-                spinnerPosition = teamAdapter.getPosition(getIntent().getStringExtra("tossWinner"));
-                toss_winner_spinner_view.setSelection(spinnerPosition);
-
-            }*/
 
         }catch (Exception e){
             e.printStackTrace();
@@ -340,6 +310,9 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
 
     //@RequiresApi(api = Build.VERSION_CODES.O)
     public void submitPrediction(){
+
+        ProgressDialog progressDialog;
+        progressDialog = ProgressDialog.show(PredictionActivity.this, "Loading", "Loading players");
 
         try{
 
@@ -390,7 +363,11 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
                 successfulPredictionIntent.putExtra("team1Name", team1Name);
                 successfulPredictionIntent.putExtra("team2Name", team2Name);
                 startActivity(successfulPredictionIntent);
-            }else if(BaseClass.serviceResponseCode == 404 || BaseClass.serviceResponseCode == 400){
+            }else if(BaseClass.serviceResponseCode == 202){
+                String error_text = BaseClass.convertStringToJson(userString).getString("error");
+                Toast.makeText(this, error_text, Toast.LENGTH_LONG).show();
+            }
+            else if(BaseClass.serviceResponseCode == 404 || BaseClass.serviceResponseCode == 400){
                 prediction_error_text_view.setText(new JSONObject(userString).getString("error"));
             }
             else{
@@ -399,6 +376,8 @@ public class PredictionActivity extends BaseActivity implements View.OnClickList
         }catch(Exception e){
             prediction_error_text_view.setText("Unknown Server Error!");
             e.printStackTrace();
+        }finally {
+            progressDialog.dismiss();
         }
 
 
