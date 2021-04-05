@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/mainAppColor</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+    </style>
+
+    <style name="MyOverflowButtonStyle" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:tint">@drawable/ic_white_overflow_icon</item>
     </style>
 
     <style name="MainAppHeaders">

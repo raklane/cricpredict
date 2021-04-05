@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,10 +34,16 @@ public class MilestonesBoard extends BaseActivity  implements View.OnClickListen
     final String TAG = "MilestonesBoardActivity";
     ArrayList<MilestoneListItemClass> milestoneListItems;
 
+    LinearLayout milestonesHeader;
+    LinearLayout noMilestonesToShow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestones_board);
+
+        milestonesHeader = (LinearLayout) findViewById(R.id.milestones_header);
+        noMilestonesToShow = (LinearLayout) findViewById(R.id.no_predictions_for_milestone);
 
         MilestonesBoardAsyncTaskRunner milestonesBoardAsyncTaskRunner = new MilestonesBoardAsyncTaskRunner();
         milestonesBoardAsyncTaskRunner.execute();
@@ -115,6 +122,11 @@ public class MilestonesBoard extends BaseActivity  implements View.OnClickListen
 
             }
         });
+
+        if(listView.getAdapter().getCount() == 0){
+            milestonesHeader.setVisibility(View.GONE);
+            noMilestonesToShow.setVisibility(View.VISIBLE);
+        }
     }
 
 

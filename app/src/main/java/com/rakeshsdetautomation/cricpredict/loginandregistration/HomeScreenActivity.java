@@ -62,6 +62,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import xdroid.toaster.Toaster;
+
 public class HomeScreenActivity extends BaseActivity implements View.OnClickListener {
 
     private NotificationManagerCompat notificationManagerCompat;
@@ -141,7 +143,13 @@ public class HomeScreenActivity extends BaseActivity implements View.OnClickList
 
         if(BaseClass.userString == null){
             try {
-                BaseClass.userString = BaseClass.convertStringToJson(BaseClass.getCall(BaseClass.serviceUrl + BaseClass.resourceParticipant + getIntent().getStringExtra("username")));
+                String userStringToConvert = BaseClass.getCall(BaseClass.serviceUrl + BaseClass.resourceParticipant + getIntent().getStringExtra("username"));
+                if(userStringToConvert.isEmpty()){
+                    Toaster.toast("No data exists for email: " + getIntent().getStringExtra("username") + ". Please logout and register!");
+                    return;
+                }
+
+                BaseClass.userString = BaseClass.convertStringToJson(userStringToConvert);
             } catch (IOException e) {
                 Log.e(TAG, "User retrieval error: " + e.getMessage());
                 e.printStackTrace();

@@ -83,6 +83,24 @@ tools:context=".MilestonesBoard" >
                     android:background="@color/secondaryAppColor"
                     android:orientation="vertical"/>
 
+                <LinearLayout
+                    android:id="@+id/no_predictions_for_milestone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/SubHeaders"
+                        android:text="No predictions to show"/>
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
 

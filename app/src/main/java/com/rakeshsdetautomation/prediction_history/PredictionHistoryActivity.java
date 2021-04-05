@@ -35,6 +35,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
 
+import xdroid.toaster.Toaster;
+
 public class PredictionHistoryActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "PredictionHistoryActiv";
@@ -156,7 +158,8 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
             JSONArray jsonArray = BaseClass.currentParticipantTabbedScores.getJSONArray("participantPredictions");
 
             if(jsonArray.length() == 0){
-                Toast.makeText(PredictionHistoryActivity.this, "User has never predicted!", Toast.LENGTH_SHORT).show();
+                Toaster.toast(R.string.user_never_predicted_text);
+                //Toast.makeText(PredictionHistoryActivity.this, "User has never predicted!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -239,7 +242,8 @@ public class PredictionHistoryActivity extends BaseActivity implements View.OnCl
 
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(PredictionHistoryActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
+            Toaster.toast(R.string.user_never_predicted_text);
+            //Toast.makeText(PredictionHistoryActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
         }
 
     }

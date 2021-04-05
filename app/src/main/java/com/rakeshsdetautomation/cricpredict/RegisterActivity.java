@@ -114,6 +114,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
+
+                                                String registrationUrl = BaseClass.serviceUrl + BaseClass.resourceRegistration;
+                                                JSONObject registrationJson = new JSONObject();
+                                                try {
+                                                    registrationJson.put("userId", emailText);
+                                                    registrationJson.put("name", nameText);
+                                                    registrationJson.put("password", "");
+                                                    String participantString = BaseClass.postCall(registrationUrl, registrationJson.toString());
+                                                    System.out.println(participantString);
+                                                } catch (JSONException | IOException e) {
+                                                    e.printStackTrace();
+                                                }
+
                                                 Toast.makeText(RegisterActivity.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                             }else {

@@ -194,6 +194,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void googleSignIn() {
+
         Intent signInIntent = BaseClass.mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
@@ -336,6 +337,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
+
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null){
             Intent homeScreenIntent = new Intent(MainActivity.this, HomeScreenActivity.class);
